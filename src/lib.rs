@@ -1,7 +1,7 @@
 use std::vec;
 
-struct MGHx0 {}
-impl MGHx0 {
+struct MGHOptimal {}
+impl MGHOptimal {
     fn rosenbrock() -> Vec<f64> {
         vec![1.0, 1.0]
     }
@@ -29,7 +29,7 @@ mod tests {
 
     #[test]
     fn rosenbrock() {
-        let result = MGH::rosenbrock(MGHx0::rosenbrock());
+        let result = MGH::rosenbrock(MGHOptimal::rosenbrock());
         assert_eq!(result, 0.0);
     }
 }
