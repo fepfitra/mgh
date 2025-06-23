@@ -91,6 +91,44 @@ impl MGHInit {
         }
         vec
     }
+
+    fn broyden_anded(n: usize) -> Vec<f64> {
+        vec![-1.; n]
+    }
+
+    fn discrete_boundary_value(n: usize) -> Vec<f64> {
+        let h = 1. / (n as f64 + 1.);
+        let mut vec = vec![0.; n];
+        for i in 0..n {
+            let t = (i as f64 + 1.) * h;
+            vec[i] = t * (t - 1.);
+        }
+        vec
+    }
+
+    fn discrete_integral_equation(n: usize) -> Vec<f64> {
+        MGHInit::discrete_boundary_value(n)
+    }
+
+    fn linear_function_full_rank(n: usize) {
+        vec![1.; n];
+    }
+
+    fn extended_powell_singular(n: usize) -> Vec<f64> {
+        let mut vec = vec![0.; n];
+        for i in 0..n {
+            vec[i] = if (i & 3) == 3 {
+                1.
+            } else if (i & 2) == 2 {
+                0.
+            } else if (i & 1) == 1 {
+                -1.
+            } else {
+                3.
+            }
+        }
+        vec
+    }
 }
 
 struct MGH {}
@@ -147,5 +185,28 @@ mod tests {
 
         let powell_singular = MGHInit::powell_singular();
         assert_eq!(powell_singular, vec![3., -1., 0., 1.]);
+
+        let discrete_boundary_value = MGHInit::discrete_boundary_value(3);
+        assert_eq!(
+            discrete_boundary_value,
+            vec![
+                (1. / 4.) * (-3. / 4.),
+                (1. / 2.) * (-1. / 2.),
+                (3. / 4.) * (-1. / 4.)
+            ]
+        );
+
+        let discrete_integral_equation = MGHInit::discrete_integral_equation(3);
+        assert_eq!(
+            discrete_integral_equation,
+            vec![
+                (1. / 4.) * (-3. / 4.),
+                (1. / 2.) * (-1. / 2.),
+                (3. / 4.) * (-1. / 4.)
+            ]
+        );
+
+        let extended_powell_singular = MGHInit::extended_powell_singular(4);
+        assert_eq!(extended_powell_singular, vec![3., -1., 0., 1.])
     }
 }
