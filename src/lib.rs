@@ -213,7 +213,7 @@ impl MGH {
     //     f1.powi(2) + f2.powi(2) + f3.powi(2)
     // }
 
-    pub fn biggs_exp6(self: &Self, x: Vec<f64>) -> f64 {
+    pub fn biggs_exp6(self: &Self, x: &[f64]) -> f64 {
         if self.m < 6 {
             panic!("number of auxiliary function must be at least 6");
         }
@@ -237,7 +237,7 @@ impl MGH {
         res
     }
 
-    pub fn gaussian(x: Vec<f64>) -> f64 {
+    pub fn gaussian(x: &[f64]) -> f64 {
         if x.len() != 3 {
             panic!("input dimension must be 3");
         }
@@ -259,7 +259,7 @@ impl MGH {
         }
         res
     }
-    pub fn powell_badly_scaled(x: Vec<f64>) -> f64 {
+    pub fn powell_badly_scaled(x: &[f64]) -> f64 {
         if x.len() != 2 {
             panic!("input dimension must be 2");
         }
@@ -271,7 +271,7 @@ impl MGH {
         f1.powi(2) + f2.powi(2)
     }
 
-    pub fn box_3d(self: &Self, x: Vec<f64>) -> f64 {
+    pub fn box_3d(self: &Self, x: &[f64]) -> f64 {
         if x.len() != 3 {
             panic!("input dimension must be 3");
         }
@@ -291,7 +291,7 @@ impl MGH {
         res
     }
 
-    pub fn variably_dimensional(x: Vec<f64>) -> f64 {
+    pub fn variably_dimensional(x: &[f64]) -> f64 {
         let mut res = 0.0;
         for i in 0..x.len() {
             res += (x[i] - 1.).powi(2);
@@ -307,7 +307,7 @@ impl MGH {
         res + fnplus1.powi(2) + fnplus1.powi(4)
     }
 
-    pub fn watson(x: Vec<f64>) -> f64 {
+    pub fn watson(x: &[f64]) -> f64 {
         if x.len() < 2 || x.len() > 31 {
             panic!("input dimension must be 2<=n<=31");
         }
@@ -339,7 +339,7 @@ impl MGH {
         res
     }
 
-    pub fn penalty1(x: Vec<f64>) -> f64 {
+    pub fn penalty1(x: &[f64]) -> f64 {
         let a: f64 = 0.00001;
         let mut res = 0.0;
         for index in 0..x.len() {
@@ -356,7 +356,7 @@ impl MGH {
         res
     }
 
-    pub fn penalty2(x: Vec<f64>) -> f64 {
+    pub fn penalty2(x: &[f64]) -> f64 {
         let a: f64 = 0.00001;
         let mut res = x[0] - 0.2;
 
@@ -383,7 +383,7 @@ impl MGH {
         res
     }
 
-    pub fn brown_badly_scaled(x: Vec<f64>) -> f64 {
+    pub fn brown_badly_scaled(x: &[f64]) -> f64 {
         let x1 = x[0];
         let x2 = x[1];
 
@@ -394,7 +394,7 @@ impl MGH {
         f1.powi(2) + f2.powi(2) + f3.powi(3)
     }
 
-    pub fn brown_and_dennis(self: &Self, x: Vec<f64>) -> f64 {
+    pub fn brown_and_dennis(self: &Self, x: &[f64]) -> f64 {
         if x.len() != 4 {
             panic!("input dimension must be 4");
         }
@@ -418,7 +418,7 @@ impl MGH {
         res
     }
 
-    pub fn gulf_research_and_development(self: &Self, x: Vec<f64>) -> f64 {
+    pub fn gulf_research_and_development(self: &Self, x: &[f64]) -> f64 {
         if self.m < 3 || self.m > 100 {
             panic!("number of auxiliary function must be in 3 <= m <= 100");
         }
@@ -435,7 +435,7 @@ impl MGH {
         }
         res
     }
-    pub fn trigonometric(x: Vec<f64>) -> f64 {
+    pub fn trigonometric(x: &[f64]) -> f64 {
         let mut res = 0.;
         for i in 1..(x.len() + 1) {
             let sum = {
@@ -451,7 +451,7 @@ impl MGH {
         res
     }
 
-    pub fn extended_rosenbrock(x: Vec<f64>) -> f64 {
+    pub fn extended_rosenbrock(x: &[f64]) -> f64 {
         if x.len() & 1 == 1 {
             panic!("number of auxiliary function must be in even");
         }
@@ -473,7 +473,7 @@ impl MGH {
         res
     }
 
-    pub fn powell_singular(x: Vec<f64>) -> f64 {
+    pub fn powell_singular(x: &[f64]) -> f64 {
         if x.len() != 4 {
             panic!("input dimension must be 4");
         }
@@ -491,7 +491,7 @@ impl MGH {
         f1.powi(2) + f2.powi(2) + f3.powi(2) + f4.powi(2)
     }
 
-    pub fn beale(x: Vec<f64>) -> f64 {
+    pub fn beale(x: &[f64]) -> f64 {
         if x.len() != 2 {
             panic!("input dimension must be 2");
         }
@@ -508,7 +508,7 @@ impl MGH {
         res
     }
 
-    pub fn wood(x: Vec<f64>) -> f64 {
+    pub fn wood(x: &[f64]) -> f64 {
         if x.len() != 4 {
             panic!("input dimension must be 4");
         }
@@ -541,7 +541,7 @@ impl MGH {
     ///
     /// A `Vec<f64>` containing the result vector f(x).
     ///
-    pub fn chebyquad(self: &Self, x: Vec<f64>) -> f64 {
+    pub fn chebyquad(self: &Self, x: &[f64]) -> f64 {
         let n = x.len();
         if self.m < n {
             panic!("number of auxiliary function must be at least n");
@@ -557,7 +557,7 @@ impl MGH {
             // --- Calculate Summation Part ---
             // (1/n) * Σ_{j=1 to n} T_i(x_j)
             let mut sum_part = 0.0;
-            for xj in &x {
+            for xj in x {
                 sum_part += shifted_chebyshev_t(i, *xj);
             }
             sum_part /= n_f64;
@@ -572,7 +572,7 @@ impl MGH {
         f_results.iter().map(|&f_i| f_i.powi(2)).sum()
     }
 
-    pub fn broyden_banded(x: Vec<f64>) -> Vec<f64> {
+    pub fn broyden_banded(x: &[f64]) -> Vec<f64> {
         let n = x.len();
         let ml = 5;
         let mu = 1;
@@ -620,7 +620,7 @@ impl MGH {
         f
     }
 
-    pub fn discrete_boundary_value(x: Vec<f64>) -> f64 {
+    pub fn discrete_boundary_value(x: &[f64]) -> f64 {
         let mut res = 0.;
         for i in 1..(x.len() + 1) {
             let index = i - 1;
@@ -640,7 +640,7 @@ impl MGH {
         }
         res
     }
-    pub fn discrete_integral_equation(x: Vec<f64>) -> f64 {
+    pub fn discrete_integral_equation(x: &[f64]) -> f64 {
         let mut res = 0.;
         for i in 1..(x.len() + 1) {
             let index = i - 1;
@@ -670,7 +670,7 @@ impl MGH {
         res
     }
 
-    pub fn extended_powell_singular(x: Vec<f64>) -> f64 {
+    pub fn extended_powell_singular(x: &[f64]) -> f64 {
         if x.len() & 3 != 0 {
             panic!("input dimension must be in multiple of 4");
         }
@@ -690,7 +690,7 @@ impl MGH {
         res
     }
 
-    pub fn linear_full_rank(self: &Self, x: Vec<f64>) -> f64 {
+    pub fn linear_full_rank(self: &Self, x: &[f64]) -> f64 {
         if self.m < x.len() {
             panic!("number of auxiliary function must be at least n");
         }
@@ -845,41 +845,41 @@ mod tests {
         // let powell_badly_scaled = MGH::powell_badly_scaled(vec![0., 9.106]);
         // assert!((powell_badly_scaled - 0.0001).abs() < 1.);
 
-        let brown_badly_scaled = MGH::brown_badly_scaled(MGHMin::brown_badly_scaled());
+        let brown_badly_scaled = MGH::brown_badly_scaled(&MGHMin::brown_badly_scaled());
         assert_eq!(brown_badly_scaled, 0.);
 
-        let beale = MGH::beale(MGHMin::beale());
+        let beale = MGH::beale(&MGHMin::beale());
         assert_eq!(beale, 0.);
 
         let gulf_research_and_development =
-            MGH::aux(3).gulf_research_and_development(MGHMin::gulf_research_and_development());
+            MGH::aux(3).gulf_research_and_development(&MGHMin::gulf_research_and_development());
         assert!((gulf_research_and_development - 0.).abs() < 1e-2);
 
-        let box_3d = MGH::aux(3).box_3d(MGHMin::box_3d());
+        let box_3d = MGH::aux(3).box_3d(&MGHMin::box_3d());
         assert_eq!(box_3d, 0.);
 
-        let powell_singular = MGH::powell_singular(MGHMin::powell_singular());
+        let powell_singular = MGH::powell_singular(&MGHMin::powell_singular());
         assert_eq!(powell_singular, 0.);
 
-        let wood = MGH::wood(MGHMin::wood());
+        let wood = MGH::wood(&MGHMin::wood());
         assert_eq!(wood, 0.);
 
-        let biggs_exp = MGH::aux(6).biggs_exp6(MGHMin::biggs_exp6());
+        let biggs_exp = MGH::aux(6).biggs_exp6(&MGHMin::biggs_exp6());
         assert_eq!(biggs_exp, 0.);
 
-        let extended_rosenbrock = MGH::extended_rosenbrock(MGHMin::extended_rosenbrock(4));
+        let extended_rosenbrock = MGH::extended_rosenbrock(&MGHMin::extended_rosenbrock(4));
         assert_eq!(extended_rosenbrock, 0.);
 
         let extended_powell_singular =
-            MGH::extended_powell_singular(MGHMin::extended_powell_singular(4));
+            MGH::extended_powell_singular(&MGHMin::extended_powell_singular(4));
         assert_eq!(extended_powell_singular, 0.);
 
-        let variably_dim = MGH::variably_dimensional(MGHMin::variably_dimensional(3));
+        let variably_dim = MGH::variably_dimensional(&MGHMin::variably_dimensional(3));
         assert_eq!(variably_dim, 0.);
 
         let m = 6;
         let n = 6;
-        let linear_full_rank = MGH::aux(m).linear_full_rank(MGHMin::linear_full_rank(n));
+        let linear_full_rank = MGH::aux(m).linear_full_rank(&MGHMin::linear_full_rank(n));
         assert_eq!(linear_full_rank, (m as f64 - n as f64));
     }
 }
