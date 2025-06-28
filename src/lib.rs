@@ -59,6 +59,10 @@ impl MGHInit {
     //     vec![-1., 0., 0.]
     // }
 
+    pub fn broyden_tridiagonal(n: usize) -> f64 {
+        vec![-1.; n]
+    }
+
     pub fn biggs_exp6() -> Vec<f64> {
         vec![1., 2., 1., 1., 1., 1.]
     }
@@ -212,6 +216,19 @@ impl MGH {
     //
     //     f1.powi(2) + f2.powi(2) + f3.powi(2)
     // }
+
+    pub fn broyden_tridiagonal(x: &[f64]) -> f64 {
+        let mut new_x = vec![0.];
+        new_x.extend_from_slice(x);
+        new_x.push(0.);
+
+        let res = 0.;
+        for i in 1..(new_x.len() - 1) {
+            let f = (3. - 2. * x[i]) * x[i] - x[i - 1] - 2. * x[i + 1] + 1.;
+            res += f.powi(2);
+        }
+        res
+    }
 
     pub fn biggs_exp6(self: &Self, x: &[f64]) -> f64 {
         if self.m < 6 {
