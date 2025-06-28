@@ -161,8 +161,8 @@ impl MGHInit {
         MGHInit::discrete_boundary_value(n)
     }
 
-    pub fn linear_full_rank(n: usize) {
-        vec![1.; n];
+    pub fn linear_full_rank(n: usize) -> Vec<f64> {
+        vec![1.; n]
     }
 
     pub fn extended_powell_singular(n: usize) -> Vec<f64> {
