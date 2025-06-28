@@ -617,7 +617,7 @@ impl MGH {
             f.push(first_part - sum);
         }
 
-        f.iter().map(|&fi| fi.powi(2)).collect()
+        f.iter().map(|&fi| fi.powi(2)).sum()
     }
 
     pub fn discrete_boundary_value(x: &[f64]) -> f64 {
