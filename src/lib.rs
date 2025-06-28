@@ -445,7 +445,7 @@ impl MGH {
                 }
                 s
             };
-            let f = x.len() as f64 - sum + i as f64 * (1. - x[i].cos()) - x[i].sin();
+            let f = x.len() as f64 - sum + i as f64 * (1. - x[i - 1].cos()) - x[i - 1].sin();
             res += f.powi(2);
         }
         res
