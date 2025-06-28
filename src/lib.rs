@@ -222,7 +222,7 @@ impl MGH {
         new_x.extend_from_slice(x);
         new_x.push(0.);
 
-        let res = 0.;
+        let mut res = 0.;
         for i in 1..(new_x.len() - 1) {
             let f = (3. - 2. * x[i]) * x[i] - x[i - 1] - 2. * x[i + 1] + 1.;
             res += f.powi(2);
