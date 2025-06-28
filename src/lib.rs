@@ -572,7 +572,7 @@ impl MGH {
         f_results.iter().map(|&f_i| f_i.powi(2)).sum()
     }
 
-    pub fn broyden_banded(x: &[f64]) -> Vec<f64> {
+    pub fn broyden_banded(x: &[f64]) -> f64 {
         let n = x.len();
         let ml = 5;
         let mu = 1;
@@ -617,7 +617,7 @@ impl MGH {
             f.push(first_part - sum);
         }
 
-        f
+        f.iter().map(|&fi| fi.powi(2)).collect()
     }
 
     pub fn discrete_boundary_value(x: &[f64]) -> f64 {
