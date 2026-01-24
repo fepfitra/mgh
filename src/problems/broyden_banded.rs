@@ -28,13 +28,13 @@ pub fn broyden_banded(x: &[f64]) -> f64 {
         let upper_j = (i + mu).min(n - 1);
 
         // Loop over the "band" of j indices.
-        for j in lower_j..=upper_j {
+        for (j, item) in x.iter().enumerate().take(upper_j + 1).skip(lower_j) {
             // The condition `j ≠ i` from the definition of J_i.
             if i == j {
                 continue;
             }
 
-            let xj = x[j];
+            let xj = item;
             sum += xj * (1.0 + xj);
         }
 

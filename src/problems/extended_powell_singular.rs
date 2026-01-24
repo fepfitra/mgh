@@ -20,8 +20,8 @@ pub fn extended_powell_singular(x: &[f64]) -> f64 {
 
 pub fn init(n: usize) -> Vec<f64> {
     let mut vec = vec![0.; n];
-    for i in 0..n {
-        vec[i] = if (i & 3) == 3 {
+    for (i, item) in vec.iter_mut().enumerate().take(n) {
+        *item = if (i & 3) == 3 {
             1.
         } else if (i & 2) == 2 {
             0.

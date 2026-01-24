@@ -31,8 +31,8 @@ pub fn chebyquad(x: &[f64], m: usize) -> f64 {
 
 pub fn init(n: usize) -> Vec<f64> {
     let mut vec = vec![0.; n];
-    for i in 0..n {
-        vec[i] = (i as f64 + 1.) / (n as f64 + 1.0)
+    for (i, item) in vec.iter_mut().enumerate().take(n) {
+        *item = (i as f64 + 1.) / (n as f64 + 1.0)
     }
     vec
 }
@@ -74,7 +74,7 @@ fn shifted_chebyshev_t(i: usize, x: f64) -> f64 {
 /// from 0 to 1, based on the pre-calculated formula in the image.
 fn integral_ti(i: usize) -> f64 {
     // For i=1 (odd), we correctly return 0. The even case i^2-1 would be a division by zero.
-    if i % 2 != 0 {
+    if !i.is_multiple_of(2) {
         // for i odd
         0.0
     } else {

@@ -1,14 +1,14 @@
 pub fn penalty1(x: &[f64]) -> f64 {
     let a: f64 = 0.00001;
     let mut res = 0.0;
-    for index in 0..x.len() {
-        let f = a.sqrt() * (x[index] - 1.);
+    for item in x {
+        let f = a.sqrt() * (item - 1.);
         res += f.powi(2);
     }
     res += {
         let mut r = 0.;
-        for i in 0..x.len() {
-            r += x[i].powi(2);
+        for item in x {
+            r += item.powi(2);
         }
         (r - 0.25).powi(2)
     };
@@ -17,8 +17,8 @@ pub fn penalty1(x: &[f64]) -> f64 {
 
 pub fn init(n: usize) -> Vec<f64> {
     let mut vec = vec![0.; n];
-    for i in 0..n {
-        vec[i] = i as f64 + 1.;
+    for (i, item) in vec.iter_mut().enumerate().take(n) {
+        *item = i as f64 + 1.;
     }
     vec
 }
