@@ -538,7 +538,7 @@ impl MGH {
         let f3 = 90.0_f64.sqrt() * (x4 - x3.powi(2));
         let f4 = 1. - x3;
         let f5 = 10.0_f64.sqrt() * (x2 + x4 - 2.);
-        let f6 = 10.0_f64.sqrt() * (x2 - x4);
+        let f6 = 10.0_f64.sqrt().recip() * (x2 - x4);
 
         f1.powi(2) + f2.powi(2) + f3.powi(2) + f4.powi(2) + f5.powi(2) + f6.powi(2)
     }
@@ -650,7 +650,7 @@ impl MGH {
             };
             let minus1 = if index > 0 { x[index - 1] } else { 0. };
 
-            let f = 2. * x[index] - minus1 - plus1 - h.powi(2) * (x[index] + t * 1.).powi(2) / 2.;
+            let f = 2. * x[index] - minus1 - plus1 + h.powi(2) * (x[index] + t + 1.).powi(3) / 2.;
 
             res += f.powi(2);
         }
@@ -665,18 +665,20 @@ impl MGH {
 
             let term1 = {
                 let mut sum = 0.;
-                for j in 1..i {
+                for j in 1..=i {
                     let jndex = j - 1;
-                    sum += t * (x[jndex] + t + 1.).powi(3);
+                    let tj = j as f64 * h;
+                    sum += tj * (x[jndex] + tj + 1.).powi(3);
                 }
                 sum
             };
 
             let term2 = {
                 let mut sum = 0.;
-                for j in 1..i {
+                for j in (i + 1)..=x.len() {
                     let jndex = j - 1;
-                    sum += (1. - t) * (x[jndex] + t + 1.).powi(3);
+                    let tj = j as f64 * h;
+                    sum += (1. - tj) * (x[jndex] + tj + 1.).powi(3);
                 }
                 sum
             };
