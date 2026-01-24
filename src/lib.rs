@@ -34,6 +34,7 @@ impl_n!(
 );
 
 impl_m!(
+    bard,
     biggs_exp6,
     box_3d,
     brown_and_dennis,
@@ -52,6 +53,7 @@ impl MGH {
 pub struct MGHMin {}
 
 impl_min_static!(
+    bard,
     beale,
     biggs_exp6,
     box_3d,

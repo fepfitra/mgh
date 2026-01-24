@@ -10,12 +10,14 @@ pub fn hellical_valley(x: &[f64]) -> f64 {
     let x3 = x[2];
 
     let theta = if x1 > 0. {
+        // theta(x1, x2) = atan(x2 / x1) / 2pi
         (x2 / x1).atan() / (2. * PI)
     } else {
+        // theta(x1, x2) = atan(x2 / x1) / 2pi + 0.5
         (x2 / x1).atan() / (2. * PI) + 0.5
     };
 
-    // f_1(x) = 10[x3 - 10\theta(x1, x2)]
+    // f_1(x) = 10[x3 - 10theta(x1, x2)]
     let f1 = 10. * (x3 - 10. * theta);
 
     // f_2(x) = 10[(x1^2 + x2^2)^0.5 - 1]
