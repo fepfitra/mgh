@@ -1,3 +1,4 @@
+pub mod bard;
 pub mod beale;
 pub mod biggs_exp6;
 pub mod box_3d;

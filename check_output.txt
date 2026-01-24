@@ -1,0 +1,76 @@
+    Checking mgh v0.1.13 (/home/fep/GitProject/mgh)
+error[E0592]: duplicate definitions with name `biggs_exp6`
+  --> src/macros.rs:5:17
+   |
+ 5 |                   pub fn $name() -> Vec<f64> {
+   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `biggs_exp6`
+...
+43 |                   pub fn $name() -> Vec<f64> {
+   |                   -------------------------- other definition for `biggs_exp6`
+   |
+  ::: src/lib.rs:10:1
+   |
+10 | / impl_static!(
+11 | |     beale,
+12 | |     biggs_exp6,
+13 | |     brown_badly_scaled,
+...  |
+20 | |     wood
+21 | | );
+   | |_- in this macro invocation
+   |
+   = note: this error originates in the macro `impl_static` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0592]: duplicate definitions with name `biggs_exp6`
+  --> src/macros.rs:12:17
+   |
+12 |                   pub fn $name(x: &[f64]) -> f64 {
+   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `biggs_exp6`
+...
+50 |                   pub fn $name(&self, x: &[f64]) -> f64 {
+   |                   ------------------------------------- other definition for `biggs_exp6`
+   |
+  ::: src/lib.rs:10:1
+   |
+10 | / impl_static!(
+11 | |     beale,
+12 | |     biggs_exp6,
+13 | |     brown_badly_scaled,
+...  |
+20 | |     wood
+21 | | );
+   | |_- in this macro invocation
+   |
+   = note: this error originates in the macro `impl_static` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0061]: this function takes 2 arguments but 1 argument was supplied
+  --> src/macros.rs:13:21
+   |
+13 |                       problems::$name::$name(x)
+   |                       ^^^^^^^^^^^^^^^^^^^^^^--- argument #2 of type `usize` is missing
+   |
+  ::: src/lib.rs:10:1
+   |
+10 | / impl_static!(
+11 | |     beale,
+12 | |     biggs_exp6,
+13 | |     brown_badly_scaled,
+...  |
+20 | |     wood
+21 | | );
+   | |_- in this macro invocation
+   |
+note: function defined here
+  --> src/problems/biggs_exp6.rs:3:8
+   |
+ 3 | pub fn biggs_exp6(x: &[f64], m: usize) -> f64 {
+   |        ^^^^^^^^^^            --------
+   = note: this error originates in the macro `impl_static` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: provide the argument
+   |
+13 |                     problems::$name::$name(x, /* usize */)
+   |                                             +++++++++++++
+
+Some errors have detailed explanations: E0061, E0592.
+For more information about an error, try `rustc --explain E0061`.
+error: could not compile `mgh` (lib) due to 3 previous errors
