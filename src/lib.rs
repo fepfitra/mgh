@@ -154,6 +154,7 @@ impl_min_static!(
     biggs_exp6,
     box_3d,
     brown_badly_scaled,
+    freudenstein_and_roth,
     gulf_research_and_development,
     powell_singular,
     rosenbrock,
