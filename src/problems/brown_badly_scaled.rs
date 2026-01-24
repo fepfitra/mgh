@@ -1,4 +1,7 @@
 pub fn brown_badly_scaled(x: &[f64]) -> f64 {
+    if x.len() != 2 {
+        panic!("input dimension must be 2");
+    }
     let x1 = x[0];
     let x2 = x[1];
 
