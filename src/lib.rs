@@ -58,6 +58,7 @@ impl_min_static!(
     brown_badly_scaled,
     freudenstein_and_roth,
     gulf_research_and_development,
+    jennrich_and_sampson,
     powell_badly_scaled,
     powell_singular,
     rosenbrock,
