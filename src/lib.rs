@@ -108,7 +108,7 @@ impl MGHInit {
     }
 
     pub fn brown_and_dennis() -> Vec<f64> {
-        vec![25., 5., -0.5, -1.]
+        vec![25., 5., -1., -1.]
     }
 
     pub fn gulf_research_and_development() -> Vec<f64> {
@@ -815,7 +815,7 @@ mod tests {
         assert_eq!(brown_badly_scaled, vec![1., 1.]);
 
         let brown_and_dennis = MGHInit::brown_and_dennis();
-        assert_eq!(brown_and_dennis, vec![25., 5., -0.5, -1.]);
+        assert_eq!(brown_and_dennis, vec![25., 5., -1., -1.]);
 
         let gulf_research_and_development = MGHInit::gulf_research_and_development();
         assert_eq!(gulf_research_and_development, vec![5., 2.5, 0.15]);
