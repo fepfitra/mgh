@@ -1,7 +1,5 @@
 pub mod problems;
 
-
-
 pub struct MGHInit {}
 pub struct MGH {
     m: usize,
@@ -84,42 +82,40 @@ macro_rules! impl_nm {
 }
 
 impl_static!(
-    hellical_valley,
+    beale,
+    brown_badly_scaled,
     freudenstein_and_roth,
     gaussian,
+    hellical_valley,
     powell_badly_scaled,
-    brown_badly_scaled,
     powell_singular,
-    beale,
+    rosenbrock,
     wood
 );
 
 impl_n!(
+    broyden_banded,
     broyden_tridiagonal,
-    variably_dimensional,
-    watson,
+    discrete_boundary_value,
+    discrete_integral_equation,
+    extended_powell_singular,
+    extended_rosenbrock,
     penalty1,
     penalty2,
     trigonometric,
-    extended_rosenbrock,
-    broyden_banded,
-    discrete_boundary_value,
-    discrete_integral_equation,
-    extended_powell_singular
+    variably_dimensional,
+    watson
 );
 
 impl_m!(
-    jennrich_and_sampson,
     biggs_exp6,
     box_3d,
     brown_and_dennis,
-    gulf_research_and_development
+    gulf_research_and_development,
+    jennrich_and_sampson
 );
 
-impl_nm!(
-    chebyquad,
-    linear_full_rank
-);
+impl_nm!(chebyquad, linear_full_rank);
 
 impl MGH {
     pub fn aux(m: usize) -> Self {
@@ -154,17 +150,18 @@ macro_rules! impl_min_n {
 }
 
 impl_min_static!(
-    brown_badly_scaled,
     beale,
-    gulf_research_and_development,
+    biggs_exp6,
     box_3d,
+    brown_badly_scaled,
+    gulf_research_and_development,
     powell_singular,
-    wood,
-    biggs_exp6
+    rosenbrock,
+    wood
 );
 
 impl_min_n!(
-    variably_dimensional,
+    extended_powell_singular,
     extended_rosenbrock,
-    extended_powell_singular
+    variably_dimensional
 );
