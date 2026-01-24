@@ -9,10 +9,15 @@ pub fn gulf_research_and_development(x: &[f64], m: usize) -> f64 {
     let x3 = x[2];
     let mut res = 0.;
     for i in 1..(m + 1) {
+        // t_i = i / 100
         let t = i as f64 / 100.;
+        // y_i = 25 + (-50 ln(t_i))^(2/3)
         let y = 25. + (-50. * t.ln()).powf(2. / 3.);
 
-        let f = E.powf(-(y * m as f64 * i as f64 * x2).abs().powf(x3) / x1) - t;
+        // f_i(x) = exp[-|y_i - x_2|^x_3 / x_1] - t_i
+        // Note: The formula in the paper "m i" is interpreted as "minus" or a typo for the subtraction operator
+        // to satisfy the zero residual condition at x = (50, 25, 1.5).
+        let f = E.powf(-(y - x2).abs().powf(x3) / x1) - t;
         res += f.powi(2);
     }
     res
@@ -41,6 +46,6 @@ mod tests {
     fn test_min() {
         let x = min();
         let val = gulf_research_and_development(&x, 3);
-        assert!((val - 0.).abs() < 1e-2); // Use epsilon because of floats
+        assert!((val - 0.).abs() < 1e-2);
     }
 }
