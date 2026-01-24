@@ -16,7 +16,11 @@ pub fn gaussian(x: &[f64]) -> f64 {
 
     for (index, item) in y.iter().enumerate().take(15) {
         let i = index as f64 + 1.;
+
+        // t_i = (8 - i) / 2
         let t = (8. - i) / 2.;
+
+        // f_i(x) = x_1 exp[-x_2(t_i - x_3)^2 / 2] - y_i
         let f = x1 * E.powf((-x2 * (t - x3).powi(2)) / 2.) - item;
         res += f.powi(2);
     }
@@ -25,6 +29,11 @@ pub fn gaussian(x: &[f64]) -> f64 {
 
 pub fn init() -> Vec<f64> {
     vec![0.4, 1., 0.]
+}
+
+pub fn min() -> Vec<f64> {
+    // f = 1.12793... * 10^-8
+    vec![0.398, 1., 0.]
 }
 
 #[cfg(test)]
