@@ -1,7 +1,7 @@
 use std::{
     f64::{
         self,
-        consts::{E, PI},
+        consts::E,
     },
     vec,
 };
@@ -59,7 +59,7 @@ impl MGHInit {
     //     vec![-1., 0., 0.]
     // }
 
-    pub fn broyden_tridiagonal(n: usize) -> f64 {
+    pub fn broyden_tridiagonal(n: usize) -> Vec<f64> {
         vec![-1.; n]
     }
 
@@ -224,7 +224,7 @@ impl MGH {
 
         let mut res = 0.;
         for i in 1..(new_x.len() - 1) {
-            let f = (3. - 2. * x[i]) * x[i] - x[i - 1] - 2. * x[i + 1] + 1.;
+            let f = (3. - 2. * new_x[i]) * new_x[i] - new_x[i - 1] - 2. * new_x[i + 1] + 1.;
             res += f.powi(2);
         }
         res
@@ -380,7 +380,7 @@ impl MGH {
         for i in 2..(x.len() + 1) {
             let index = i - 1;
             let y = E.powf(i as f64 / 10.) + E.powf((i as f64 - 1.) / 10.);
-            let f = a.sqrt() * (E.powf(x[index] / 10.) + E.powf(x[index - 1]) - y);
+            let f = a.sqrt() * (E.powf(x[index] / 10.) + E.powf(x[index - 1] / 10.) - y);
             res += f.powi(2);
         }
 
@@ -408,7 +408,7 @@ impl MGH {
         let f2 = x2 - 0.000002;
         let f3 = x1 * x2 - 2.;
 
-        f1.powi(2) + f2.powi(2) + f3.powi(3)
+        f1.powi(2) + f2.powi(2) + f3.powi(2)
     }
 
     pub fn brown_and_dennis(self: &Self, x: &[f64]) -> f64 {
@@ -594,7 +594,7 @@ impl MGH {
         let ml = 5;
         let mu = 1;
 
-        // This will store the results f_i(x) for i = 1 to n.
+        // store the results f_i(x) for i = 1 to n.
         let mut f = Vec::with_capacity(n);
 
         // Loop to calculate each f_i(x).
@@ -603,11 +603,10 @@ impl MGH {
         for i in 0..n {
             let xi = x[i];
 
-            // This is the first part of the formula: x_i(2 + 5x_i^2) + 1
+            // first part of the formula: x_i(2 + 5x_i^2) + 1
             let first_part = xi * (2.0 + 5.0 * xi.powi(2)) + 1.0;
 
-            // --- Calculate the summation part: Σ_{j ∈ J_i} x_j(1 + x_j) ---
-
+            // Calculate the summation part: Σ_{j ∈ J_i} x_j(1 + x_j)
             let mut sum = 0.0;
 
             // Determine the bounds for the inner loop based on J_i.
@@ -798,6 +797,7 @@ mod tests {
         assert_eq!(box_3d, vec![0., 10., 20.]);
 
         let variably_dim = MGHInit::variably_dimensional(3);
+
         assert_eq!(variably_dim, vec![1. - 1. / 3., 1. - 2. / 3., 1. - 3. / 3.]);
 
         let watson = MGHInit::watson(3);
@@ -898,5 +898,26 @@ mod tests {
         let n = 6;
         let linear_full_rank = MGH::aux(m).linear_full_rank(&MGHMin::linear_full_rank(n));
         assert_eq!(linear_full_rank, (m as f64 - n as f64));
+    }
+    #[test]
+    fn test_broyden_tridiagonal() {
+        let n = 10;
+        let x = MGHInit::broyden_tridiagonal(n);
+        assert_eq!(x.len(), n);
+        assert_eq!(x[0], -1.0);
+        
+        // should not panic
+        let val = MGH::broyden_tridiagonal(&x);
+        assert!(val.is_finite());
+    }
+
+    #[test]
+    fn test_chebyquad() {
+        let n = 4;
+        let m = 4;
+        let x = MGHInit::chebyquad(n);
+        let mgh = MGH::aux(m);
+        let val = mgh.chebyquad(&x);
+        assert!(val.is_finite());
     }
 }
