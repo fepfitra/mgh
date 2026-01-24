@@ -13,6 +13,7 @@ pub fn jennrich_and_sampson(x: &[f64], m: usize) -> f64 {
     let mut res = 0.0;
 
     for i in 1..=m {
+         // f_i(x) = 2 + 2i - (exp(i * x1) + exp(i * x2))
          let fi = 2.0 + 2.0 * i as f64 - (E.powf(i as f64 * x1) + E.powf(i as f64 * x2));
          res += fi.powi(2);
     }
@@ -21,6 +22,10 @@ pub fn jennrich_and_sampson(x: &[f64], m: usize) -> f64 {
 
 pub fn init() -> Vec<f64> {
     vec![0.3, 0.4]
+}
+
+pub fn min() -> Vec<f64> {
+    vec![0.2578, 0.2578]
 }
 
 #[cfg(test)]
@@ -32,5 +37,13 @@ mod tests {
         let x = init();
         let val = jennrich_and_sampson(&x, 10);
         assert!(val.is_finite());
+    }
+
+    #[test]
+    fn test_min() {
+        let x = min();
+        let val = jennrich_and_sampson(&x, 10);
+        // around 124.362
+        assert!((val - 124.362).abs() < 1e-1);
     }
 }
