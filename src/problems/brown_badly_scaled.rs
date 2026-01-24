@@ -2,8 +2,13 @@ pub fn brown_badly_scaled(x: &[f64]) -> f64 {
     let x1 = x[0];
     let x2 = x[1];
 
+    // f_1(x) = x1 - 10^6
     let f1 = x1 - 1000000.;
+
+    // f_2(x) = x2 - 2 * 10^-6
     let f2 = x2 - 0.000002;
+
+    // f_3(x) = x1 * x2 - 2
     let f3 = x1 * x2 - 2.;
 
     f1.powi(2) + f2.powi(2) + f3.powi(2)
