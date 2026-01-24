@@ -1,0 +1,52 @@
+use std::f64::consts::E;
+
+pub fn biggs_exp6(x: &[f64], m: usize) -> f64 {
+    if m < 6 {
+        panic!("number of auxiliary function must be at least 6");
+    }
+    if x.len() != 6 {
+        panic!("input dimension must be 6");
+    }
+    let x1 = x[0];
+    let x2 = x[1];
+    let x3 = x[2];
+    let x4 = x[3];
+    let x5 = x[4];
+    let x6 = x[5];
+
+    let mut res = 0.0;
+    for i in 1..(m + 1) {
+        let t = 0.1 * i as f64;
+        let y = E.powf(-t) - 5. * E.powf(-10. * t) + 3. * E.powf(-4. * t);
+        let f = x3 * E.powf(-t * x1) - x4 * E.powf(-t * x2) + x6 * E.powf(-t * x5) - y;
+        res += f.powi(2);
+    }
+    res
+}
+
+pub fn init() -> Vec<f64> {
+    vec![1., 2., 1., 1., 1., 1.]
+}
+
+pub fn min() -> Vec<f64> {
+    vec![1., 10., 1., 5., 4., 3.]
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_biggs_exp6() {
+        let x = init();
+        let val = biggs_exp6(&x, 10);
+        assert!(val.is_finite());
+    }
+
+    #[test]
+    fn test_min() {
+        let x = min();
+        let val = biggs_exp6(&x, 6);
+        assert_eq!(val, 0.);
+    }
+}
