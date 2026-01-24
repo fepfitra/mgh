@@ -31,11 +31,6 @@ pub fn init() -> Vec<f64> {
     vec![0.4, 1., 0.]
 }
 
-pub fn min() -> Vec<f64> {
-    // f = 1.12793... * 10^-8
-    vec![0.398, 1., 0.]
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

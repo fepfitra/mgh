@@ -59,7 +59,6 @@ impl_min_static!(
     box_3d,
     brown_badly_scaled,
     freudenstein_and_roth,
-    gaussian,
     gulf_research_and_development,
     hellical_valley,
     jennrich_and_sampson,
