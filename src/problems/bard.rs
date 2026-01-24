@@ -1,10 +1,6 @@
-pub fn bard(x: &[f64], m: usize) -> f64 {
+pub fn bard(x: &[f64]) -> f64 {
     if x.len() != 3 {
         panic!("input dimension must be 3");
-    }
-    // m is typically 15
-    if m == 0 {
-         panic!("m must be > 0");
     }
 
     let x1 = x[0];
@@ -17,12 +13,8 @@ pub fn bard(x: &[f64], m: usize) -> f64 {
 
     let mut res = 0.0;
     
-    // The problem definition usually specifies m=15. 
-    // If m < 15, we take the first m elements. 
-    // If m > 15, we ideally shouldn't be here or cycle, but standard is m=15.
-    let limit = if m > 15 { 15 } else { m };
-
-    for i_idx in 1..=limit {
+    // The problem definition specifies m=15.
+    for i_idx in 1..=15 {
         let u = i_idx as f64;
         let v = 16.0 - u;
         let w = if u < v { u } else { v };
@@ -30,7 +22,7 @@ pub fn bard(x: &[f64], m: usize) -> f64 {
         // f_i(x) = y_i - (x_1 + u_i / (v_i * x_2 + w_i * x_3))
         let denom = v * x2 + w * x3;
         let term = if denom.abs() < 1e-10 {
-             // Handle potential division by zero if needed, though standard problem usually avoids it near solution
+             // Handle potential division by zero
              if u > 0. { f64::INFINITY } else { 0. }
         } else {
              u / denom
@@ -58,14 +50,14 @@ mod tests {
     #[test]
     fn test_bard() {
         let x = init();
-        let val = bard(&x, 15);
+        let val = bard(&x);
         assert!(val.is_finite());
     }
 
     #[test]
     fn test_min() {
         let x = min();
-        let val = bard(&x, 15);
+        let val = bard(&x);
         // f = 8.21487e-3
         assert!((val - 8.21487e-3).abs() < 1e-4);
     }

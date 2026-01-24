@@ -8,6 +8,7 @@ pub struct MGH {
 }
 
 impl_static!(
+    bard,
     beale,
     brown_badly_scaled,
     freudenstein_and_roth,
@@ -34,7 +35,6 @@ impl_n!(
 );
 
 impl_m!(
-    bard,
     biggs_exp6,
     box_3d,
     brown_and_dennis,
