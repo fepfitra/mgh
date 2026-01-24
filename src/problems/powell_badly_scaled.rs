@@ -20,6 +20,10 @@ pub fn init() -> Vec<f64> {
     vec![0., 1.]
 }
 
+pub fn min() -> Vec<f64> {
+    vec![1.09815933e-5, 9.10614674]
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -29,5 +33,13 @@ mod tests {
         let x = init();
         let val = powell_badly_scaled(&x);
         assert!(val.is_finite());
+    }
+
+    #[test]
+    fn test_min() {
+        let x = min();
+        let val = powell_badly_scaled(&x);
+        // not exactly 0.0 because of floating point approximations
+        assert!(val < 1e-8);
     }
 }

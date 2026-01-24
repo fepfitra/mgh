@@ -156,6 +156,7 @@ impl_min_static!(
     brown_badly_scaled,
     freudenstein_and_roth,
     gulf_research_and_development,
+    powell_badly_scaled,
     powell_singular,
     rosenbrock,
     wood
