@@ -1,7 +1,7 @@
 use std::{
     f64::{
         self,
-        consts::E,
+        consts::{E, PI},
     },
     vec,
 };
@@ -55,9 +55,17 @@ fn integral_ti(i: usize) -> f64 {
 pub struct MGHInit {}
 
 impl MGHInit {
-    // pub fn hellical_valley() -> Vec<f64> {
-    //     vec![-1., 0., 0.]
-    // }
+    pub fn hellical_valley() -> Vec<f64> {
+        vec![-1., 0., 0.]
+    }
+
+    pub fn freudenstein_and_roth() -> Vec<f64> {
+        vec![0.5, -2.]
+    }
+
+    pub fn jennrich_and_sampson() -> Vec<f64> {
+        vec![0.3, 0.4]
+    }
 
     pub fn broyden_tridiagonal(n: usize) -> Vec<f64> {
         vec![-1.; n]
@@ -195,27 +203,59 @@ impl MGH {
         Self { m }
     }
 
-    // pub fn hellical_valley(x: Vec<f64>) -> f64 {
-    //     if x.len() != 3 {
-    //         panic!("input dimension must be 3");
-    //     }
-    //
-    //     let x1 = x[0];
-    //     let x2 = x[1];
-    //     let x3 = x[2];
-    //
-    //     let theta = if x1 > 0. {
-    //         (x2 / x1).atan() / (2. * PI)
-    //     } else {
-    //         (x2 / x1).atan() / (2. * PI) + 0.5
-    //     };
-    //
-    //     let f1 = 10. * (x3 - 10. * theta);
-    //     let f2 = 10. * ((x1.powi(2) + x2.powi(2)).sqrt() - 1.);
-    //     let f3 = x3;
-    //
-    //     f1.powi(2) + f2.powi(2) + f3.powi(2)
-    // }
+    pub fn hellical_valley(x: &[f64]) -> f64 {
+        if x.len() != 3 {
+            panic!("input dimension must be 3");
+        }
+
+        let x1 = x[0];
+        let x2 = x[1];
+        let x3 = x[2];
+
+        let theta = if x1 > 0. {
+            (x2 / x1).atan() / (2. * PI)
+        } else {
+            (x2 / x1).atan() / (2. * PI) + 0.5
+        };
+
+        let f1 = 10. * (x3 - 10. * theta);
+        let f2 = 10. * ((x1.powi(2) + x2.powi(2)).sqrt() - 1.);
+        let f3 = x3;
+
+        f1.powi(2) + f2.powi(2) + f3.powi(2)
+    }
+
+    pub fn freudenstein_and_roth(x: &[f64]) -> f64 {
+        if x.len() != 2 {
+            panic!("input dimension must be 2");
+        }
+        let x1 = x[0];
+        let x2 = x[1];
+
+        let f1 = -13. + x1 + ((5. - x2) * x2 - 2.) * x2;
+        let f2 = -29. + x1 + ((x2 + 1.) * x2 - 14.) * x2;
+
+        f1.powi(2) + f2.powi(2)
+    }
+
+    pub fn jennrich_and_sampson(self: &Self, x: &[f64]) -> f64 {
+        if x.len() != 2 {
+            panic!("input dimension must be 2");
+        }
+        if self.m < 2 { // Image says m=10 usually, but formula valid for m >= 2
+             panic!("number of auxiliary function must be at least 2");
+        }
+        
+        let x1 = x[0];
+        let x2 = x[1];
+        let mut res = 0.0;
+
+        for i in 1..=self.m {
+             let fi = 2.0 + 2.0 * i as f64 - (E.powf(i as f64 * x1) + E.powf(i as f64 * x2));
+             res += fi.powi(2);
+        }
+        res
+    }
 
     pub fn broyden_tridiagonal(x: &[f64]) -> f64 {
         let mut new_x = vec![0.];
@@ -921,5 +961,20 @@ mod tests {
         let mgh = MGH::aux(m);
         let val = mgh.chebyquad(&x);
         assert!(val.is_finite());
+    }
+    #[test]
+    fn test_new_functions() {
+        let helical_valley = MGHInit::hellical_valley();
+        let val_helical = MGH::hellical_valley(&helical_valley);
+        assert!(val_helical.is_finite());
+
+        let freudenstein = MGHInit::freudenstein_and_roth();
+        let val_freudenstein = MGH::freudenstein_and_roth(&freudenstein);
+        assert!(val_freudenstein.is_finite());
+
+        let jennrich = MGHInit::jennrich_and_sampson();
+        let mgh = MGH::aux(10);
+        let val_jennrich = mgh.jennrich_and_sampson(&jennrich);
+        assert!(val_jennrich.is_finite());
     }
 }
