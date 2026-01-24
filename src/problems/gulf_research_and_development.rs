@@ -1,6 +1,9 @@
 use std::f64::consts::E;
 
 pub fn gulf_research_and_development(x: &[f64], m: usize) -> f64 {
+    if x.len() != 3 {
+        panic!("input dimension must be 3");
+    }
     if !(3..=100).contains(&m) {
         panic!("number of auxiliary function must be in 3 <= m <= 100");
     }
