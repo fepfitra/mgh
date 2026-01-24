@@ -1,0 +1,28 @@
+pub fn freudenstein_and_roth(x: &[f64]) -> f64 {
+    if x.len() != 2 {
+        panic!("input dimension must be 2");
+    }
+    let x1 = x[0];
+    let x2 = x[1];
+
+    let f1 = -13. + x1 + ((5. - x2) * x2 - 2.) * x2;
+    let f2 = -29. + x1 + ((x2 + 1.) * x2 - 14.) * x2;
+
+    f1.powi(2) + f2.powi(2)
+}
+
+pub fn init() -> Vec<f64> {
+    vec![0.5, -2.]
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_freudenstein_and_roth() {
+        let x = init();
+        let val = freudenstein_and_roth(&x);
+        assert!(val.is_finite());
+    }
+}
