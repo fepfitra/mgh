@@ -30,7 +30,7 @@ pub fn init(n: usize) -> Vec<f64> {
     vec![1.; n]
 }
 
-pub fn min(n: usize) -> Vec<f64> {
+pub fn min(_n: usize) -> Vec<f64> {
     // Should be -1 for Linear Full Rank? MGHMin had a test:
     // let linear_full_rank = MGH::aux(m).linear_full_rank(&MGHMin::linear_full_rank(n));
     // assert_eq!(linear_full_rank, (m as f64 - n as f64));

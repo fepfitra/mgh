@@ -14,10 +14,10 @@ pub fn gaussian(x: &[f64]) -> f64 {
 
     let mut res = 0.0;
 
-    for index in 0..15 {
+    for (index, item) in y.iter().enumerate().take(15) {
         let i = index as f64 + 1.;
         let t = (8. - i) / 2.;
-        let f = x1 * E.powf((-x2 * (t - x3).powi(2)) / 2.) - y[index];
+        let f = x1 * E.powf((-x2 * (t - x3).powi(2)) / 2.) - item;
         res += f.powi(2);
     }
     res

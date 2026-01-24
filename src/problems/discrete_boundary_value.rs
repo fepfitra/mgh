@@ -22,9 +22,9 @@ pub fn discrete_boundary_value(x: &[f64]) -> f64 {
 pub fn init(n: usize) -> Vec<f64> {
     let h = 1. / (n as f64 + 1.);
     let mut vec = vec![0.; n];
-    for i in 0..n {
+    for (i, item) in vec.iter_mut().enumerate().take(n) {
         let t = (i as f64 + 1.) * h;
-        vec[i] = t * (t - 1.);
+        *item = t * (t - 1.);
     }
     vec
 }

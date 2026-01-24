@@ -1,7 +1,7 @@
 pub fn variably_dimensional(x: &[f64]) -> f64 {
     let mut res = 0.0;
-    for i in 0..x.len() {
-        res += (x[i] - 1.).powi(2);
+    for item in x {
+        res += (item - 1.).powi(2);
     }
     let fnplus1 = {
         let mut f = 0.0;
@@ -16,8 +16,8 @@ pub fn variably_dimensional(x: &[f64]) -> f64 {
 
 pub fn init(n: usize) -> Vec<f64> {
     let mut vec = vec![0.; n];
-    for i in 0..n {
-        vec[i] = 1. - (i as f64 + 1.) / (n as f64);
+    for (i, item) in vec.iter_mut().enumerate().take(n) {
+        *item = 1. - (i as f64 + 1.) / (n as f64);
     }
     vec
 }

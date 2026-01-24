@@ -22,8 +22,8 @@ pub fn extended_rosenbrock(x: &[f64]) -> f64 {
 
 pub fn init(n: usize) -> Vec<f64> {
     let mut vec = vec![0.; n];
-    for i in 0..n {
-        vec[i] = if (i & 1) == 1 { 1.0 } else { -1.2 };
+    for (i, item) in vec.iter_mut().enumerate().take(n) {
+        *item = if (i & 1) == 1 { 1.0 } else { -1.2 };
     }
     vec
 }

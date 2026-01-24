@@ -3,8 +3,8 @@ pub fn trigonometric(x: &[f64]) -> f64 {
     for i in 1..(x.len() + 1) {
         let sum = {
             let mut s = 0.;
-            for j in 0..x.len() {
-                s += x[j].cos();
+            for item in x {
+                s += item.cos();
             }
             s
         };
