@@ -8,9 +8,16 @@ pub fn powell_singular(x: &[f64]) -> f64 {
     let x3 = x[2];
     let x4 = x[3];
 
+    // f_1(x) = x_1 + 10x_2
     let f1 = x1 + 10. * x2;
+
+    // f_2(x) = 5^0.5(x_3 - x_4)
     let f2 = 5.0_f64.sqrt() * (x3 - x4);
+
+    // f_3(x) = (x_2 - 2x_3)^2
     let f3 = (x2 - 2. * x3).powi(2);
+
+    // f_4(x) = 10^0.5(x_1 - x_4)^2
     let f4 = 10.0_f64.sqrt() * (x1 - x4).powi(2);
 
     f1.powi(2) + f2.powi(2) + f3.powi(2) + f4.powi(2)
