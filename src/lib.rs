@@ -14,6 +14,7 @@ impl_static!(
     freudenstein_and_roth,
     gaussian,
     hellical_valley,
+    kowalik_and_osborne,
     meyer,
     powell_badly_scaled,
     powell_singular,
