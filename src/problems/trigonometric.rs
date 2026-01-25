@@ -1,14 +1,12 @@
 pub fn trigonometric(x: &[f64]) -> f64 {
     let mut res = 0.;
-    for i in 1..(x.len() + 1) {
-        let sum = {
-            let mut s = 0.;
-            for item in x {
-                s += item.cos();
-            }
-            s
-        };
-        let f = x.len() as f64 - sum + i as f64 * (1. - x[i - 1].cos()) - x[i - 1].sin();
+    let sum_cos: f64 = x.iter().map(|xi| xi.cos()).sum();
+    let n = x.len() as f64;
+
+    for (i_idx, &xi) in x.iter().enumerate() {
+        let i = i_idx as f64 + 1.0;
+        // f_i(x) = n - sum(cos x_j) + i(1 - cos x_i) - sin x_i
+        let f = n - sum_cos + i * (1. - xi.cos()) - xi.sin();
         res += f.powi(2);
     }
     res
