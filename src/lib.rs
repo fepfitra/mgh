@@ -17,6 +17,7 @@ impl_static!(
     kowalik_and_osborne,
     meyer,
     osborne_1,
+    osborne_2,
     powell_badly_scaled,
     powell_singular,
     rosenbrock,
