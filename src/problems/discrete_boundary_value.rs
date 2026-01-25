@@ -10,8 +10,10 @@ pub fn discrete_boundary_value(x: &[f64]) -> f64 {
         } else {
             0.
         };
+        // x_{i-1} (with x_0 = 0)
         let minus1 = if index > 0 { x[index - 1] } else { 0. };
 
+        // f_i(x) = 2x_i - x_{i-1} - x_{i+1} + h^2(x_i + t_i + 1)^3 / 2
         let f = 2. * x[index] - minus1 - plus1 + h.powi(2) * (x[index] + t + 1.).powi(3) / 2.;
 
         res += f.powi(2);
