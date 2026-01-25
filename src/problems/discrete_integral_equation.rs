@@ -7,6 +7,7 @@ pub fn discrete_integral_equation(x: &[f64]) -> f64 {
         let h = 1. / (x.len() as f64 + 1.);
         let t = i as f64 * h;
 
+        // term1 = sum_{j=1}^i t_j (x_j + t_j + 1)^3
         let term1 = {
             let mut sum = 0.;
             for j in 1..=i {
@@ -17,6 +18,7 @@ pub fn discrete_integral_equation(x: &[f64]) -> f64 {
             sum
         };
 
+        // term2 = sum_{j=i+1}^n (1 - t_j) (x_j + t_j + 1)^3
         let term2 = {
             let mut sum = 0.;
             for j in (i + 1)..=x.len() {
@@ -26,6 +28,8 @@ pub fn discrete_integral_equation(x: &[f64]) -> f64 {
             }
             sum
         };
+        
+        // f_i(x) = x_i + h[(1-t_i) term1 + t_i term2] / 2
         let f = x[index] + h * ((1. - t) * term1 + t * term2) / 2.;
         res += f.powi(2);
     }
