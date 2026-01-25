@@ -3,16 +3,13 @@ pub fn extended_rosenbrock(x: &[f64]) -> f64 {
         panic!("number of auxiliary function must be in even");
     }
     let mut res = 0.0;
-    let num_pairs = x.len() / 2;
 
-    for i in 0..num_pairs {
-        let x_odd_idx = 2 * i;
-        let x_even_idx = 2 * i + 1;
+    for chunk in x.chunks_exact(2) {
+        let &[x1, x2] = chunk else { unreachable!() };
 
-        let x1 = x[x_odd_idx];
-        let x2 = x[x_even_idx];
-
+        // f_{2i-1}(x) = 10(x_{2i} - x_{2i-1}^2)
         let term1 = 10.0 * (x2 - x1.powi(2));
+        // f_{2i}(x) = 1 - x_{2i-1}
         let term2 = 1.0 - x1;
 
         res += term1.powi(2) + term2.powi(2);
