@@ -35,15 +35,15 @@ pub fn init(n: usize) -> Vec<f64> {
     vec
 }
 
-/// Calculates the value of the i-th Chebyshev polynomial of the first kind,
-/// shifted to the interval [0, 1].
-/// Standard Chebyshev polynomials T_i(z) are defined on [-1, 1].
-/// To shift them to x in [0, 1], we use the transformation z = 2x - 1.
-///
-/// They follow the recurrence relation:
-/// T_0(z) = 1
-/// T_1(z) = z
-/// T_i(z) = 2z * T_{i-1}(z) - T_{i-2}(z)
+// Calculates the value of the i-th Chebyshev polynomial of the first kind,
+// shifted to the interval [0, 1].
+// Standard Chebyshev polynomials T_i(z) are defined on [-1, 1].
+// To shift them to x in [0, 1], we use the transformation z = 2x - 1.
+//
+// They follow the recurrence relation:
+// T_0(z) = 1
+// T_1(z) = z
+// T_i(z) = 2z * T_{i-1}(z) - T_{i-2}(z)
 fn shifted_chebyshev_t(i: usize, x: f64) -> f64 {
     // Map x from [0, 1] to z in [-1, 1]
     let z = 2.0 * x - 1.0;
