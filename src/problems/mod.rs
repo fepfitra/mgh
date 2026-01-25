@@ -2,6 +2,7 @@ pub mod bard;
 pub mod beale;
 pub mod biggs_exp6;
 pub mod box_3d;
+pub mod brown_almost_linear;
 pub mod brown_and_dennis;
 pub mod brown_badly_scaled;
 pub mod broyden_banded;

@@ -27,6 +27,7 @@ impl_static!(
 impl_n!(
     broyden_banded,
     broyden_tridiagonal,
+    brown_almost_linear,
     discrete_boundary_value,
     discrete_integral_equation,
     extended_powell_singular,
