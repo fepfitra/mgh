@@ -27,6 +27,6 @@ pub mod powell_badly_scaled;
 pub mod powell_singular;
 pub mod rosenbrock;
 pub mod trigonometric;
-pub mod variably_dimensional;
+pub mod variably_dimensioned;
 pub mod watson;
 pub mod wood;

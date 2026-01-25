@@ -34,7 +34,7 @@ impl_n!(
     penalty1,
     penalty2,
     trigonometric,
-    variably_dimensional,
+    variably_dimensioned,
     watson
 );
 
@@ -75,5 +75,5 @@ impl_min_static!(
 impl_min_n!(
     extended_powell_singular,
     extended_rosenbrock,
-    variably_dimensional
+    variably_dimensioned
 );
