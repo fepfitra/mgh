@@ -1,9 +1,7 @@
 pub fn rosenbrock(x: &[f64]) -> f64 {
-    if x.len() != 2 {
+    let &[x1, x2] = x else {
         panic!("input dimension must be 2");
-    }
-    let x1 = x[0];
-    let x2 = x[1];
+    };
 
     // f_1(x) = 10(x2 - x1^2)
     let f1 = 10. * (x2 - x1.powi(2));

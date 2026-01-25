@@ -1,18 +1,13 @@
 use std::f64::consts::E;
 
 pub fn brown_and_dennis(x: &[f64], m: usize) -> f64 {
-    if x.len() != 4 {
+    let &[x1, x2, x3, x4] = x else {
         panic!("input dimension must be 4");
-    }
+    };
 
     if m < x.len() {
         panic!("number of auxiliary function must be at least n");
     }
-
-    let x1 = x[0];
-    let x2 = x[1];
-    let x3 = x[2];
-    let x4 = x[3];
     let mut res = 0.;
 
     for i in 1..(m + 1) {

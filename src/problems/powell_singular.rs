@@ -1,12 +1,7 @@
 pub fn powell_singular(x: &[f64]) -> f64 {
-    if x.len() != 4 {
+    let &[x1, x2, x3, x4] = x else {
         panic!("input dimension must be 4");
-    }
-
-    let x1 = x[0];
-    let x2 = x[1];
-    let x3 = x[2];
-    let x4 = x[3];
+    };
 
     // f_1(x) = x_1 + 10x_2
     let f1 = x1 + 10. * x2;

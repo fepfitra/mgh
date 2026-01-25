@@ -1,13 +1,9 @@
 use std::f64::consts::E;
 
 pub fn meyer(x: &[f64]) -> f64 {
-    if x.len() != 3 {
+    let &[x1, x2, x3] = x else {
         panic!("input dimension must be 3");
-    }
-
-    let x1 = x[0];
-    let x2 = x[1];
-    let x3 = x[2];
+    };
 
     let y = vec![
         34780., 28610., 23650., 19630., 16370., 13720., 11540., 9744., 8261., 7030., 6005., 5147.,

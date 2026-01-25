@@ -1,16 +1,13 @@
 use std::f64::consts::E;
 
 pub fn gaussian(x: &[f64]) -> f64 {
-    if x.len() != 3 {
+    let &[x1, x2, x3] = x else {
         panic!("input dimension must be 3");
-    }
+    };
     let y = vec![
         0.0009, 0.0044, 0.0175, 0.0540, 0.1295, 0.2420, 0.3521, 0.3989, 0.3521, 0.2420, 0.1295,
         0.0540, 0.0175, 0.0044, 0.0009,
     ];
-    let x1 = x[0];
-    let x2 = x[1];
-    let x3 = x[2];
 
     let mut res = 0.0;
 

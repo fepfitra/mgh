@@ -1,11 +1,9 @@
 use std::f64::consts::E;
 
 pub fn powell_badly_scaled(x: &[f64]) -> f64 {
-    if x.len() != 2 {
+    let &[x1, x2] = x else {
         panic!("input dimension must be 2");
-    }
-    let x1 = x[0];
-    let x2 = x[1];
+    };
 
     // f_1(x) = 10^4 * x1 * x2 - 1
     let f1 = 10000. * x1 * x2 - 1.;

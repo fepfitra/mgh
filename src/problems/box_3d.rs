@@ -1,15 +1,12 @@
 use std::f64::consts::E;
 
 pub fn box_3d(x: &[f64], m: usize) -> f64 {
-    if x.len() != 3 {
+    let &[x1, x2, x3] = x else {
         panic!("input dimension must be 3");
-    }
+    };
     if m < 3 {
         panic!("number of auxiliary function must be at least 3");
     }
-    let x1 = x[0];
-    let x2 = x[1];
-    let x3 = x[2];
 
     let mut res = 0.0;
     for i in 1..(m + 1) {

@@ -4,15 +4,9 @@ pub fn biggs_exp6(x: &[f64], m: usize) -> f64 {
     if m < 6 {
         panic!("number of auxiliary function must be at least 6");
     }
-    if x.len() != 6 {
+    let &[x1, x2, x3, x4, x5, x6] = x else {
         panic!("input dimension must be 6");
-    }
-    let x1 = x[0];
-    let x2 = x[1];
-    let x3 = x[2];
-    let x4 = x[3];
-    let x5 = x[4];
-    let x6 = x[5];
+    };
 
     let mut res = 0.0;
     for i in 1..(m + 1) {

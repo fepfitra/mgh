@@ -1,15 +1,12 @@
 use std::f64::consts::E;
 
 pub fn jennrich_and_sampson(x: &[f64], m: usize) -> f64 {
-    if x.len() != 2 {
+    let &[x1, x2] = x else {
         panic!("input dimension must be 2");
-    }
+    };
     if m < 2 { // Image says m=10 usually, but formula valid for m >= 2
          panic!("number of auxiliary function must be at least 2");
     }
-    
-    let x1 = x[0];
-    let x2 = x[1];
     let mut res = 0.0;
 
     for i in 1..=m {

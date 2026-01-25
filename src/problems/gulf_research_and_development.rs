@@ -1,15 +1,12 @@
 use std::f64::consts::E;
 
 pub fn gulf_research_and_development(x: &[f64], m: usize) -> f64 {
-    if x.len() != 3 {
+    let &[x1, x2, x3] = x else {
         panic!("input dimension must be 3");
-    }
+    };
     if !(3..=100).contains(&m) {
         panic!("number of auxiliary function must be in 3 <= m <= 100");
     }
-    let x1 = x[0];
-    let x2 = x[1];
-    let x3 = x[2];
     let mut res = 0.;
     for i in 1..(m + 1) {
         // t_i = i / 100

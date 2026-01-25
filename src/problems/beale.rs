@@ -1,9 +1,7 @@
 pub fn beale(x: &[f64]) -> f64 {
-    if x.len() != 2 {
+    let &[x1, x2] = x else {
         panic!("input dimension must be 2");
-    }
-    let x1 = x[0];
-    let x2 = x[1];
+    };
     let y = [1.5, 2.25, 2.625];
 
     let mut res = 0.0;

@@ -1,11 +1,7 @@
 pub fn bard(x: &[f64]) -> f64 {
-    if x.len() != 3 {
+    let &[x1, x2, x3] = x else {
         panic!("input dimension must be 3");
-    }
-
-    let x1 = x[0];
-    let x2 = x[1];
-    let x3 = x[2];
+    };
 
     let y = [
         0.14, 0.18, 0.22, 0.25, 0.29, 0.32, 0.35, 0.39, 0.37, 0.58, 0.73, 0.96, 1.34, 2.10, 4.39,
