@@ -16,6 +16,7 @@ impl_static!(
     hellical_valley,
     kowalik_and_osborne,
     meyer,
+    osborne_1,
     powell_badly_scaled,
     powell_singular,
     rosenbrock,

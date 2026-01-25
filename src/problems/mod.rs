@@ -17,6 +17,7 @@ pub mod gulf_research_and_development;
 pub mod hellical_valley;
 pub mod jennrich_and_sampson;
 pub mod kowalik_and_osborne;
+pub mod osborne_1;
 pub mod linear_full_rank;
 pub mod meyer;
 pub mod penalty1;
