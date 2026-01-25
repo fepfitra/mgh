@@ -47,7 +47,7 @@ impl_m!(
     jennrich_and_sampson
 );
 
-impl_nm!(chebyquad, linear_full_rank, linear_rank_1);
+impl_nm!(chebyquad, linear_full_rank, linear_rank_1, linear_rank_1_zero);
 
 impl MGH {
     pub fn aux(m: usize) -> Self {

@@ -22,6 +22,7 @@ pub mod osborne_1;
 pub mod osborne_2;
 pub mod linear_full_rank;
 pub mod linear_rank_1;
+pub mod linear_rank_1_zero;
 pub mod meyer;
 pub mod penalty1;
 pub mod penalty2;
