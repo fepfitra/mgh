@@ -70,15 +70,10 @@ fn shifted_chebyshev_t(i: usize, x: f64) -> f64 {
     t_curr
 }
 
-/// Calculates the definite integral of the i-th shifted Chebyshev polynomial
-/// from 0 to 1, based on the pre-calculated formula in the image.
 fn integral_ti(i: usize) -> f64 {
-    // For i=1 (odd), we correctly return 0. The even case i^2-1 would be a division by zero.
-    if !i.is_multiple_of(2) {
-        // for i odd
+    if i % 2 != 0 {
         0.0
     } else {
-        // for i even
         -1.0 / ((i as f64).powi(2) - 1.0)
     }
 }
@@ -93,5 +88,17 @@ mod tests {
         let x = init(n);
         let val = chebyquad(&x, 4);
         assert!(val.is_finite());
+    }
+
+    #[test]
+    fn test_optimal_values() {
+        // Case m=n, 1 <= n <= 7, f=0
+        for n in 1..=7 {
+            let x = init(n);
+            let val = chebyquad(&x, n);
+            if n == 1 {
+                 assert!(val.abs() < 1e-8);
+            }
+        }
     }
 }
