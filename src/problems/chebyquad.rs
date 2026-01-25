@@ -10,19 +10,17 @@ pub fn chebyquad(x: &[f64], m: usize) -> f64 {
     let mut f_results = Vec::with_capacity(m);
 
     // Loop i from 1 to m (mathematical index) to calculate each f_i(x)
+    // f_i(x) = (1/n)sum(T_i(x_j)) - integral(T_i(x))
     for i in 1..=m {
-        // --- Calculate Summation Part ---
-        // (1/n) * Σ_{j=1 to n} T_i(x_j)
+        // sum = sum(T_i(x_j))
         let mut sum_part = 0.0;
         for xj in x {
             sum_part += shifted_chebyshev_t(i, *xj);
         }
         sum_part /= n_f64;
 
-        // --- Calculate Integral Part ---
         let integral_part = integral_ti(i);
 
-        // --- Combine and store the result for f_i ---
         f_results.push(sum_part - integral_part);
     }
 

@@ -11,7 +11,7 @@ pub fn linear_rank_1(x: &[f64], m: usize) -> f64 {
         s += (j as f64 + 1.0) * xj;
     }
 
-    // f_i(x) = i * S - 1
+    // f_i(x) = i S - 1
     for i in 1..=m {
         let f = (i as f64) * s - 1.0;
         res += f.powi(2);

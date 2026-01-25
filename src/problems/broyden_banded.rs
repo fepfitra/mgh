@@ -34,9 +34,6 @@ pub fn init(n: usize) -> Vec<f64> {
 
 pub fn min(n: usize) -> Vec<f64> {
     vec![-1.; n]
-    // The previous implementation didn't have a min for broyden banded in MGHMin.
-    // We omit it for now or assume close to 0 if we added it?
-    // User request "examine one by one" suggests just moving what exists.
 }
 
 #[cfg(test)]
