@@ -16,7 +16,7 @@ pub fn brown_and_dennis(x: &[f64], m: usize) -> f64 {
 
         // f_i(x) = (x_1 + t_i x_2 - e^t_i)^2 + (x_3 + x_4 sin(t_i) - cos(t_i))^2
         let f = (x1 + t * x2 - E.powf(t)).powi(2) + (x3 + x4 * t.sin() - t.cos()).powi(2);
-        res += f;
+        res += f.powi(2);
     }
     res
 }
