@@ -9,8 +9,7 @@ pub fn linear_rank_1_zero(x: &[f64], m: usize) -> f64 {
     // Calculate S = sum_{j=2}^{n-1} j * x_j
     let mut s = 0.0;
     if n > 2 {
-        for j in 1..(n - 1) {
-            let xj = x[j];
+        for (j, &xj) in x.iter().enumerate().take(n - 1).skip(1) {
             let math_j = (j + 1) as f64;
             s += math_j * xj;
         }

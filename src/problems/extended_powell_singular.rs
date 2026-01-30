@@ -1,5 +1,5 @@
 pub fn extended_powell_singular(x: &[f64]) -> f64 {
-    if x.len() % 4 != 0 {
+    if !x.len().is_multiple_of(4) {
         panic!("input dimension must be multiple of 4");
     }
     let mut res = 0.;

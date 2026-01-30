@@ -6,7 +6,7 @@ pub fn linear_full_rank(x: &[f64], m: usize) -> f64 {
     let mut res = 0.;
     let sum_x: f64 = x.iter().sum();
 
-    for (_i, &xi) in x.iter().enumerate() {
+    for &xi in x.iter() {
         // f_i(x) = x_i - (2/m)sum(x_j) - 1
         let f = xi - 2. * sum_x / m as f64 - 1.;
         res += f.powi(2);

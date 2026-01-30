@@ -69,7 +69,7 @@ fn shifted_chebyshev_t(i: usize, x: f64) -> f64 {
 }
 
 fn integral_ti(i: usize) -> f64 {
-    if i % 2 != 0 {
+    if !i.is_multiple_of(2) {
         0.0
     } else {
         -1.0 / ((i as f64).powi(2) - 1.0)
