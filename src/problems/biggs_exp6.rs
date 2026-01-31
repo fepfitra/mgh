@@ -12,8 +12,10 @@ pub fn biggs_exp6(x: &[f64], m: usize) -> f64 {
     for i in 1..(m + 1) {
         // t_i = 0.1 * i
         let t = 0.1 * i as f64;
+
         // y_i = exp(-t) - 5exp(-10t) + 3exp(-4t)
         let y = E.powf(-t) - 5. * E.powf(-10. * t) + 3. * E.powf(-4. * t);
+
         // f_i(x) = x3 exp(-t x1) - x4 exp(-t x2) + x6 exp(-t x5) - y_i
         let f = x3 * E.powf(-t * x1) - x4 * E.powf(-t * x2) + x6 * E.powf(-t * x5) - y;
         res += f.powi(2);

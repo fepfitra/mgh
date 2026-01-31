@@ -28,6 +28,10 @@ pub fn init() -> Vec<f64> {
     vec![0.4, 1., 0.]
 }
 
+pub fn min() -> Vec<f64> {
+    vec![0.3989561, 1.0000191, 2.787451e-20]
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -37,5 +41,12 @@ mod tests {
         let x = init();
         let val = gaussian(&x);
         assert!(val.is_finite());
+    }
+
+    #[test]
+    fn test_global_minimum() {
+        let x = min();
+        let val = gaussian(&x);
+        assert!((val - 1.12793e-8).abs() < 1e-10);
     }
 }

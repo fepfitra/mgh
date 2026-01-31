@@ -11,6 +11,7 @@ pub fn gulf_research_and_development(x: &[f64], m: usize) -> f64 {
     for i in 1..(m + 1) {
         // t_i = i / 100
         let t = i as f64 / 100.;
+
         // y_i = 25 + (-50 ln(t_i))^(2/3)
         let y = 25. + (-50. * t.ln()).powf(2. / 3.);
 

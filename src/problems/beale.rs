@@ -5,10 +5,10 @@ pub fn beale(x: &[f64]) -> f64 {
     let y = [1.5, 2.25, 2.625];
 
     let mut res = 0.0;
-    // f_i(x) = y_i - x_1(1 - x_2^i)
-    // where y_1 = 1.5, y_2 = 2.25, y_3 = 2.625
     for i in 1..4 {
         let index = i - 1;
+
+        // f_i(x) = y_i - x_1(1 - x_2^i)
         let f = y[index] - x1 * (1. - x2.powi(i as i32));
         res += f.powi(2);
     }

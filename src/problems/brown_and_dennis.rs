@@ -25,6 +25,10 @@ pub fn init() -> Vec<f64> {
     vec![25., 5., -5., -1.]
 }
 
+pub fn min() -> Vec<f64> {
+    vec![-11.59444, 13.20363, -0.4034395, 0.2367788]
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -32,7 +36,14 @@ mod tests {
     #[test]
     fn test_brown_and_dennis() {
         let x = init();
-        let val = brown_and_dennis(&x, 10);
+        let val = brown_and_dennis(&x, 20);
         assert!(val.is_finite());
+    }
+
+    #[test]
+    fn test_global_minimum() {
+        let x = min();
+        let val = brown_and_dennis(&x, 20);
+        assert!((val - 85822.2).abs() < 1e-1);
     }
 }

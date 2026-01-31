@@ -12,6 +12,7 @@ pub fn box_3d(x: &[f64], m: usize) -> f64 {
     for i in 1..(m + 1) {
         // t_i = 0.1 * i
         let t = 0.1 * i as f64;
+
         // f_i(x) = exp(-t_i * x_1) - exp(-t_i * x_2) - x_3(exp(-t_i) - exp(-10t_i))
         let f = E.powf(-t * x1) - E.powf(-t * x2) - x3 * (E.powf(-t) - E.powf(-10. * t));
         res += f.powi(2)
