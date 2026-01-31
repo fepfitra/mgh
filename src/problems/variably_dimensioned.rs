@@ -4,7 +4,8 @@ pub fn variably_dimensioned(x: &[f64]) -> f64 {
         // f_i(x) = x_i - 1
         res += (item - 1.).powi(2);
     }
-    
+
+    // sum j(x_j - 1)
     let sum_j = {
         let mut f = 0.0;
         for (i, &xi) in x.iter().enumerate() {
@@ -13,11 +14,8 @@ pub fn variably_dimensioned(x: &[f64]) -> f64 {
         }
         f
     };
-    
-    // f_{n+1}(x) = sum j(x_j - 1)
-    // f_{n+2}(x) = (sum j(x_j - 1))^2
-    // F(x) = sum f_i^2 + f_{n+1}^2 + f_{n+2}^2
-    //      = sum (x_i-1)^2 + sum_j^2 + sum_j^4
+
+    // F(x) = sum_i f_i(x)^2 + (sum_j f_j(x))^2 + (sum_j f_j(x))^4
     res + sum_j.powi(2) + sum_j.powi(4)
 }
 
@@ -53,3 +51,4 @@ mod tests {
         assert_eq!(val, 0.);
     }
 }
+
