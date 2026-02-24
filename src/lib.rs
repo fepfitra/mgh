@@ -62,8 +62,10 @@ impl_min_static!(
     beale,
     biggs_exp6,
     box_3d,
+    brown_and_dennis,
     brown_badly_scaled,
     freudenstein_and_roth,
+    gaussian,
     gulf_research_and_development,
     hellical_valley,
     jennrich_and_sampson,
@@ -74,7 +76,9 @@ impl_min_static!(
 );
 
 impl_min_n!(
+    brown_almost_linear,
     extended_powell_singular,
     extended_rosenbrock,
+    linear_full_rank,
     variably_dimensioned
 );

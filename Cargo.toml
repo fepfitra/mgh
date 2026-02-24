@@ -1,6 +1,6 @@
 [package]
 name = "mgh"
-version = "0.1.15"
+version = "0.1.16"
 edition = "2024"
 description = "A Collection of Moré-Garbow-Hilstrom https://dl.acm.org/doi/pdf/10.1145/355934.355936"
 license = "MIT"
